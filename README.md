@@ -27,7 +27,7 @@ To qualify for the __official limited edition Hacktoberfest shirt__, you must re
  <p align="center"><h3>🛑🛑 ELIGIBILITY CRITERIA 🛑🛑</h3></p>
  
 *	```⚠️⚠️ Same Programming questions will not be accepted Also see Each And Every Folder README.md file for more Details⚠️⚠️```
-*	`STAR & FORK the Repository This repository.`
+*	`STAR & FORK This Repository.`
 
 
 
