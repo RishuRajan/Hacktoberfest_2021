@@ -1,0 +1,83 @@
+/* Sort an array A using Merge Sort.
+Input format :
+Line 1 : Integer n i.e. Array size
+Line 2 : Array elements (separated by space)
+Output format :
+Array elements in increasing order (separated by space)
+Constraints :
+1 <= n <= 10^3
+Sample Input 1 :
+6 
+2 6 8 5 4 3
+Sample Output 1 :
+2 3 4 5 6 8 8 */
+
+#include <iostream>
+
+using namespace std;
+
+void mergeSort(int input[],int si,int ei)
+{
+   if(si>=ei)                           //Base case
+   return;
+    
+    int mid=(si+ei)/2;              
+     mergeSort(input,si,mid);            //Recursion call on the first half
+    mergeSort(input,mid+1,ei);           //Recusion call on the second half
+   
+    
+    int arr[(ei-si)+1];
+    int i=si ;
+    int j=mid+1 ; 
+    int k=0;
+    
+    while(i<=mid && j<=ei)                 //sorting elements and placing them in the newarray
+    {
+        if(input[i]<input[j])
+            {
+                arr[k++]=input[i++];
+            }
+        else
+            {
+                arr[k++]=input[j++];
+            }
+    }
+    
+    while(i<=mid)              
+    {
+        arr[k++]=input[i++];
+     }
+    while(j<=ei)
+    {
+        arr[k++]=input[j++];
+    }
+    
+    for(int i=si;i<=ei;i++)      //copying contents back to original array
+    {
+        input[i]=arr[i - si];
+    }
+    
+    
+    
+    
+}
+
+void mergeSort(int input[], int size)
+{
+	mergeSort(input,0,size-1);        
+}
+
+
+
+
+int main() {
+  int length;
+  cin >> length;
+  int* input = new int[length];
+  for(int i=0; i < length; i++)
+    cin >> input[i];
+  mergeSort(input, length);
+  for(int i = 0; i < length; i++) {
+    cout << input[i] << " ";
+  }
+}
