@@ -24,7 +24,7 @@ bool static comp(vector<int> a, vector<int> b)
     return a[1] < b[1];
 }
 
-int solve(vector<vector<int>> pairs, int n)
+int Solve(vector<vector<int>> pairs, int n)
 {
     int curr = pairs[0][1];
     int cnt = 1;
@@ -44,7 +44,7 @@ int findLongestChain(vector<vector<int>> &pairs)
 {
     int n = pairs.size();
     sort(pairs.begin(), pairs.end(), comp);
-    return solve(pairs, n);
+    return Solve(pairs, n);
 }
 
 int main(){
