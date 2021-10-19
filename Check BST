@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node
+{
+	int data;
+	struct Node *left;
+	struct Node *right;
+	Node(int k)
+	{
+		data=k;
+		left=right=NULL;
+	}
+};
+bool check_BST(Node *root,int minm,int maxm)
+{
+	if(root==NULL)
+	  return true;
+	return(root->data >minm && root->data<maxm && check_BST(root->left,minm,root->data) && check_BST(root->right,root->data,maxm));
+}
+
+bool check_BST2(Node *root)
+int main()
+{
+	Node *root;
+	root=new Node(50);
+	root->left=new Node(20);
+	root->left=new Node(10);
+	root->left->right=new Node(40);
+	root->right=new Node(100);
+	root->right->right=new Node(120);
+	root->right->left=new Node(70);
+	root->right->left->right=new Node(80);
+	root->right->left->left=new Node(60);
+	
+	int minm=INT_MIN,maxm=INT_MAX;
+    if(check_BST(root,minm,maxm))
+       cout<<"YES !! This tree is follow BST Property"<<endl;
+    else
+       cout<<"NO !! This tree is Not follow BST property"<<endl;
+	
+	return 0;
+}
