@@ -57,7 +57,7 @@ int MAH(vector<int> &v)
     return max_v;
 }
 
-int maximalrectangle(vector<vector<char>> &matrix)
+int maximalRectangle(vector<vector<char>> &matrix)
 {
     int n = matrix.size();
     if (n == 0)
@@ -85,5 +85,5 @@ int maximalrectangle(vector<vector<char>> &matrix)
 
 int main(){
     vector<vector<char>> matrix = {{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}};
-    cout << "The area of largest rectangle containing only 1's is " << maximalrectangle(matrix);
+    cout << "The area of largest rectangle containing only 1's is " << maximalRectangle(matrix);
 }
