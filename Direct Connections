@@ -1,0 +1,111 @@
+public static void main(String[] args) {
+	Scanner scan = new Scanner(System.in);
+	int t = scan.nextInt();
+	while (t-- > 0) {
+		int n = scan.nextInt();
+		ArrayList<City> coordinateList = new ArrayList<>(n);
+		ArrayList<City> populationList = new ArrayList<>(n);
+		for (int i = 0; i < n; i++)
+			coordinateList.add(new City(scan.nextInt()));
+
+		for (int i = 0; i < n; i++)
+			coordinateList.get(i).population = scan.nextInt();
+		// Sort according to their coordinates
+		coordinateList.sort((x, y) -> Integer.compare(x.coordinate, y.coordinate));
+		int sortedCoordinates[] = new int[n];
+
+		for (int i = 0; i < n; i++) {
+			populationList.add(new City(coordinateList.get(i), i));
+			sortedCoordinates[i] = coordinateList.get(i).coordinate;
+		}
+		// Sort according to their populations (max to min)
+		populationList.sort((x, y) -> Integer.compare(y.population, x.population));
+
+		int cityNumber[] = new int[n];
+		for (int i = 0; i < n; i++)
+			cityNumber[i] = 1;
+		BinaryIndexTree cityNumberTree = new BinaryIndexTree(cityNumber);
+		BinaryIndexTree cityCoordinateTree = new BinaryIndexTree(sortedCoordinates);
+
+		long totalCable = 0;
+		for (int i = 0; i < n; i++) {
+			City currentCity = populationList.get(i);
+			int index = currentCity.index;
+			int coordinate = currentCity.coordinate;
+
+			long leftCable = cityNumberTree.getSum(index - 1) * coordinate;
+			leftCable -= cityCoordinateTree.getSum(index - 1);
+
+			long rightcable = cityCoordinateTree.sumRange(index + 1, n - 1);
+			rightcable -= cityNumberTree.sumRange(index + 1, n - 1) * coordinate;
+
+			totalCable += (leftCable + rightcable) * currentCity.population;
+			totalCable %= 1000000007;
+
+			cityCoordinateTree.update(index, 0);
+			cityNumberTree.update(index, 0);
+		}
+
+		System.out.println(totalCable);
+
+	}
+
+}
+
+static class City {
+	int coordinate;
+	int population;
+	int index;
+
+	public City(int coordinate) {
+		this.coordinate = coordinate;
+	}
+
+	public City(City other, int index) {
+		this.coordinate = other.coordinate;
+		this.population = other.population;
+		this.index = index;
+	}
+}
+
+static class BinaryIndexTree {
+	int[] nums;
+	long[] BIT;
+	int n;
+
+	public BinaryIndexTree(int[] nums) {
+		this.nums = nums;
+		n = nums.length;
+		BIT = new long[n + 1];
+		for (int i = 0; i < n; i++)
+			init(i, nums[i]);
+	}
+
+	public void init(int i, int val) {
+		i++;
+		while (i <= n) {
+			BIT[i] += val;
+			i += (i & -i);
+		}
+	}
+
+	void update(int i, int val) {
+		int diff = val - nums[i];
+		nums[i] = val;
+		init(i, diff);
+	}
+
+	public long getSum(int i) {
+		long sum = 0;
+		i++;
+		while (i > 0) {
+			sum += BIT[i];
+			i -= (i & -i);
+		}
+		return sum;
+	}
+
+	public long sumRange(int i, int j) {
+		return getSum(j) - getSum(i - 1);
+	}
+}
