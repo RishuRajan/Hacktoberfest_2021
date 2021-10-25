@@ -1,7 +1,21 @@
-
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 typedef long long int ll;
+int min(int a,int b){
+    if (a>b)
+    {
+        return b;
+    }
+    return a;
+}
+
+int max(int a,int b){
+    if (a>b)
+    {
+        return a;
+    }
+    return b;
+}
 int main()
 {
     ll t;
