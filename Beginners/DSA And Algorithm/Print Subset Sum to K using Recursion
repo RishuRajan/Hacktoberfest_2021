@@ -1,0 +1,54 @@
+/* Given an array A and an integer K, print all subsets of A which sum to K.
+Sample Input:
+5 12 3 17 1 18 15 3 17 
+6
+Sample Output:
+3 3
+5 1 */
+
+
+#include <iostream>
+using namespace std;
+
+void subsetSumToKHelper(int input[], int startIndex, int size, int output[], int oSize, int k) {
+    if(startIndex == size) { 
+        if(k == 0) {
+            for(int i = 0; i < oSize; i++) {
+                cout << output[i] << " ";
+            }
+            cout << endl;
+        }
+        return;
+    }
+   
+        int smallOutput2[1000];
+    
+      int i;
+        for(i = 0; i < oSize; i++) {
+
+            smallOutput2[i] = output[i];
+        }
+                   smallOutput2[i] = input[startIndex];
+
+      
+    
+    subsetSumToKHelper(input, startIndex+1, size, output, oSize, k);
+  
+        subsetSumToKHelper(input, startIndex+1, size, smallOutput2, oSize+1, k-input[startIndex]);
+    
+}
+void printSubsetSumToK(int input[], int size, int k) { 
+    int output[1000]; 
+    subsetSumToKHelper(input, 0, size, output, 0, k);
+}
+
+
+
+int main() {
+  int input[1000],length,k;
+  cin >> length;
+  for(int i=0; i < length; i++)
+    cin >> input[i];
+  cin>>k;
+  printSubsetSumToK(input, length,k);
+}
