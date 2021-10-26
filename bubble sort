@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+    int n; cin>>n; //size of array 
+    int a[n]; //declear the array with size of n
+    for(int i=0;i<n;i++) {
+        cin>>a[i]; // input of array  4 1 2 5 3
+    }// 1 4 2 5 3, 1 2 4 5 3, 
+    // 4 > 2 -> , 4 > 5 , 5 > 3 ->  
+    // in 2nd pass -> 1 2 4 3 5
+    // 1st iter -> 1 2 4 3 5
+    //2nd iter -> 1 2 4 3 5
+    //3rd iter -> 1 2 3 4 5
+    // 4th iter -> 1 2 3 4 5
+    //3rd pass -> 1 2 3 4 5
+    // 1 2 3 4 5
+
+    for(int i=0;i<n;i++) {  // i = 1
+        for(int j=i+1;j<n;j++) {  // j = 2 
+            if(a[i] > a[j]) {  // 1 > 2, 2 > 4 ,4 > 3  ->, 4 > 5
+                swap(a[i],a[j]); // 3 4
+            }
+        }
+    }
+    for(int i=0;i<n;i++) {
+        cout<<a[i] <<" ";
+    }
+    return 0;
+}
+
+// time complexty of this program is - > o(n) in best case and avg case 
+// in wrost case compexity of this progran is ->O(n^2);
+
+// space complexity of this program is -> O(1) because I'm not using any extra space;
