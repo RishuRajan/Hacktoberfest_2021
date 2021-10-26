@@ -1,0 +1,36 @@
+        // Deep copy constructor 
+
+#include<bits/stdc++.h>
+using namespace std;
+class student{
+    private:
+        int age;
+        int *fee;
+    public:
+        student() {
+            fee = new int;
+        }
+
+        void set_data(int a,int f) {
+            age = a;
+            *fee = f; 
+            
+        }
+        student(student& copies) {
+            age = copies.age;
+            fee = new int;
+            *fee = *(copies.fee);
+        }
+        void print() {
+            cout<<"age = "<< age<<endl;
+            cout<<"fee = "<< *fee<<endl;
+        }
+};
+
+int main () {
+    student s1;
+    s1.set_data(24,100);
+    s1.print();
+    student s2 = s1;
+    s2.print();
+}
